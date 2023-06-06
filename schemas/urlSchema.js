@@ -8,7 +8,7 @@ let urlSchema = new mongoose.Schema(
         shortUrl:{
             type:String,
             required:true,
-            default: `${shortId.generate}.nova.ly`
+            default: `${shortId.generate}.nova`
         },
         clicks:{type:Number,required:true,default: 0},
         createdAt:{type:Date,default:Date.now}
