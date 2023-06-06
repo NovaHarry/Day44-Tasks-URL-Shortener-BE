@@ -31,7 +31,7 @@ router.post('/login', async function(req, res, next) {
       )
       }
       else{
-        res.status(500).send({
+        res.status(400).send({
           message:"Your Email ID or Password is incorrect."
       })
     }}
