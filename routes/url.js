@@ -47,5 +47,26 @@ router.get('/url', async function(req, res, next) {
   }
   });
 
+  router.get('/url/:shortUrl', async(req,res)=>{
+    try{
+      let shortUrl = await urlModel.findOne({shortUrl:req.params.shortUrl});
+      let clicks =  shortUrl.clicks++;
+        res.status(200).send({
+        clicks,
+        shortUrl,
+        message:"Redirecting" 
+      }
+      )
+      shortUrl.save();
+      res.redirect(shortUrl.fullUrl);
+    }
+    catch (error){
+      res.status(500).send({
+        message:"Internal server error",
+        error
+    })
+  }
+  })
+
 
   module.exports = router;
