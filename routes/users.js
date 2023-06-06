@@ -89,7 +89,7 @@ router.get('/forgotpassword/:email',async(req, res)=>{
           to_mail: userByID.email,
           from_name: "FORTGOT PASSWORD LINK",
           subject : "Click the link to reset your account password",
-          message: `${process.env.BASE_URL}/update-password/${randomStrings}`
+          message: `${process.env.BASE_URL}/users/update-password/${randomStrings}`
       }
         
         emailjs
