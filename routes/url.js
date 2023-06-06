@@ -47,26 +47,20 @@ router.get('/url', async function(req, res, next) {
   }
   });
 
-  router.put('/url/:shortUrl',async(req, res)=>{
+  router.get('/url/:shortUrl',async(req, res , next)=>{
     try{
       let urlRedirect = await urlModel.findOne({shortUrl:req.params.shortUrl});
       
       if(urlRedirect){
+
         urlRedirect.clicks = urlRedirect.clicks+1;
 
-        await urlRedirect.save();
+        await urlRedirect.save()
 
         res.redirect(urlRedirect.fullUrl)
+      }
 
-      res.status(200).send({
-        urlRedirect,
-        message:`Redirecting`
-      })
-    }else{
-        res.status(400).send({
-            message:"Something went wrong"
-          })
-    }
+       
     }
     catch (error){
       res.status(500).send({
@@ -75,6 +69,7 @@ router.get('/url', async function(req, res, next) {
     })
   }
   });
+
 
 
   module.exports = router;
