@@ -47,7 +47,7 @@ router.get('/url', async function(req, res, next) {
   }
   });
 
-  router.put('/:shortUrl',async(req, res)=>{
+  router.put('/url/:shortUrl',async(req, res)=>{
     try{
       let urlRedirect = await urlModel.findOne({shortUrl:req.params.shortUrl});
       
