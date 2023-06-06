@@ -6,6 +6,9 @@ const {dbUrl} = require('../common/dbConfig');
 mongoose.connect(dbUrl);
 
 
+
+
+
 /* GET ALL USER DATA */
 router.get('/url', async function(req, res, next) {
     try{
@@ -46,6 +49,7 @@ router.get('/url', async function(req, res, next) {
     })
   }
   });
+
 
   router.get('/:shortUrl',async(req, res , next)=>{
     try{
