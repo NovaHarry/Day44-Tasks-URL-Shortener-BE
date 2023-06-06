@@ -16,11 +16,14 @@ const randomStringss = ()=>{
   } 
 
 /* GET ALL USER DATA */
-router.get('/login/:email', async function(req, res, next) {
+router.post('/login', async function(req, res, next) {
     try{
-      let userByID = await userDataModel.findOne({email:req.params.email});
-      let urls = await urlModel.find();
-      if(userByID){
+      let userByID = await userDataModel.findOne({email:req.body.email});
+      let dbPassword = userByID.password;
+      let pagePassword = req.body.password;
+
+      if(await dbPassword == pagePassword){
+        let urls = await urlModel.find();
         res.status(200).send({
           urls,
           message:"User Login Successfull"
@@ -29,7 +32,7 @@ router.get('/login/:email', async function(req, res, next) {
       }
       else{
         res.status(500).send({
-          message:"Unable to find user for this Email"
+          message:"Your Email ID or Password is incorrect."
       })
     }}
     catch (error){
@@ -45,7 +48,6 @@ router.get('/login/:email', async function(req, res, next) {
 router.post('/adduser',async(req, res)=>{
   try{
     let user = await userDataModel.findOne({email:req.body.email});
-
     if(!user){
     let user = await userDataModel.create(req.body);
     res.status(200).send({
